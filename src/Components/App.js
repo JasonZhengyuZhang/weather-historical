@@ -9,8 +9,12 @@ class App extends Component {
     super(props);
     this.state = {
       selectedWeek: null,
+      weather: null,
     };
     this.handleWeekClick = this.handleWeekClick.bind(this);
+  }
+
+  componentDidMount(){
   }
 
   handleWeekClick(week, { selected }) {
@@ -20,6 +24,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state.weather);
     return (
       <div className="App">
        <DayPicker
