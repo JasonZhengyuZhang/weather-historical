@@ -15,17 +15,20 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.callApi()
-      .then(res => this.setState({ weather: res.express }))
-      .catch(err => console.log(err));
+    fetch("/weather")
+      .then(response => response)
+      .then(data => this.setState({ weather: data }));
+    // this.callApi()
+    //   .then(res => this.setState({ weather: res.express }))
+    //   .catch(err => console.log(err));
   };
 
   callApi = async () => {
-    const response = await fetch('/weather');
-    const body = await response.json();
+    const response = await fetch('/api/hello');
+    const body = await response;
 
     if (response.status !== 200) throw Error(body.message);
-
+    console.log(body);
     return body;
   };
 

@@ -15,8 +15,13 @@ app.get('/', function (req, res) {
 var request = require('request');
 app.get('/weather', function(req, res) {
     request('https://api.darksky.net/forecast/c49ded6a7aff6ace26f8d2211f21c584/37.8267,-122.4233', function(error, response, body) {
-        return res.json(body)
+        res.send(body)
+        console.log(body);
     });
 });
+
+app.get('/api/hello', (req, res) => {
+    res.send({ express: 'Hello From Express' });
+  });
 
 app.listen(process.env.PORT || 8080);
