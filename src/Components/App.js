@@ -9,13 +9,25 @@ class App extends Component {
     super(props);
     this.state = {
       selectedWeek: null,
-      weather: null,
+      weather: '',
     };
     this.handleWeekClick = this.handleWeekClick.bind(this);
   }
 
-  componentDidMount(){
-  }
+  componentDidMount() {
+    this.callApi()
+      .then(res => this.setState({ weather: res.express }))
+      .catch(err => console.log(err));
+  };
+
+  callApi = async () => {
+    const response = await fetch('/weather');
+    const body = await response.json();
+
+    if (response.status !== 200) throw Error(body.message);
+
+    return body;
+  };
 
   handleWeekClick(week, { selected }) {
     this.setState({
